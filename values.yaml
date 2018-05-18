@@ -1,0 +1,61 @@
+## Bitnami MongoDB image version
+## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
+##
+## 3.6-jessie has a serious bug which cause replica set could not receover
+## https://jira.mongodb.org/browse/SERVER-32639
+## https://jira.mongodb.org/browse/SERVER-32845
+image: 
+  repository: "mongo"
+  tag: "3.4-jessie"
+  pullPolicy: "IfNotPresent"
+
+## Kubernetes service type
+serviceType: ClusterIP
+
+rootPassword: rootpassword
+username: user
+password: changeme
+database: default
+replicas: 3
+replSetName: rs01
+port: 27017
+bindIp: 0.0.0.0
+
+terminationGracePeriodSeconds: 300
+
+## antiAffinity
+## "hard" would be co-locate the pods of service A and service B in the same zone
+## "sort" would be spread the pods from this service across zones
+antiAffinity: "soft"
+
+# affinity:
+#   nodeAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       nodeSelectorTerms:
+#       - matchExpressions:
+#         - key: cloud.google.com/gke-nodepool
+#           operator: In
+#           values:
+#           - xg1pool3
+
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  enabled: true
+  # storageClass: "ssd"
+  accessMode: ReadWriteOnce
+  size: 2Gi
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 1
+
+# podAnnotations:

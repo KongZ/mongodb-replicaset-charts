@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ template "mongodb.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "mongodb.fullname" . }}
+spec:
+  clusterIP: None
+  ports:
+    - port: {{ default 27017 .Values.port }}
+      targetPort: mongodb
+  selector:
+    app: {{ template "mongodb.name" . }}
+    release: {{ .Release.Name }}

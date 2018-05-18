@@ -1,0 +1,11 @@
+name: mongodb-replicaset
+home: https://mongodb.org
+version: 0.1.0
+description: MongoDB
+icon: https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg
+sources:
+- https://mongodb.org
+- https://github.com/KongZ/elasticsearch-chart
+maintainers:
+- name: KongZ
+  email: goonohc@mgail.com
